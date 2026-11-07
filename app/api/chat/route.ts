@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { SYSTEM_PROMPT } from "@/lib/systemPrompt";
+import { premiumFrom } from "@/lib/stripe";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -13,7 +14,7 @@ const MAX_CHARS = 4000;
 
 // Einfaches Rate-Limit pro IP (im Speicher, reicht für den Start)
 const hits = new Map<string, { count: number; reset: number }>();
-const LIMIT = 20; // Anfragen
+const LIMIT = 30; // Anfragen
 const WINDOW_MS = 10 * 60 * 1000; // pro 10 Minuten
 
 function rateLimited(ip: string): boolean {
@@ -56,6 +57,11 @@ export async function POST(req: Request) {
     );
   }
 
+  // Die KI ist nur mit aktivem Abo nutzbar (schützt dein API-Guthaben).
+  if (!(await premiumFrom(req))) {
+    return new Response("PREMIUM_REQUIRED", { status: 402 });
+  }
+
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
   if (rateLimited(ip)) {
     return new Response(
@@ -71,6 +77,7 @@ export async function POST(req: Request) {
     /* ungültiges JSON */
   }
   if (!messages) return new Response("Ungültige Anfrage.", { status: 400 });
+  const lang = /^[a-z]{2}$/.test(new URL(req.url).searchParams.get("lang") || "") ? new URL(req.url).searchParams.get("lang")! : "de";
 
   const stream = client.beta.messages.stream({
     model: "claude-opus-5-5",
@@ -78,7 +85,11 @@ export async function POST(req: Request) {
     output_config: { effort: "low" }, // schnelle Antworten für den Chat
     betas: ["server-side-fallback-2026-07-01"],
     fallbacks: "default",
-    system: SYSTEM_PROMPT,
+    system:
+      SYSTEM_PROMPT +
+      (lang !== "de"
+        ? `\n\nThe user has chosen the website language "${lang}". Answer in that language unless they write in another one. Use the local emergency number (112 in the EU, 911 in USA/Canada, 999 in the UK) where it fits.`
+        : ""),
     messages,
   });
 

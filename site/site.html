@@ -40,11 +40,10 @@ h1, h2, h3 { font-family: var(--display); letter-spacing: .01em; text-wrap: bala
 .nav a { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; text-decoration: none; color: var(--fg); font-weight: 500; }
 .nav a:hover { background: var(--panel2); }
 .nav a.on { background: var(--green); color: var(--green-ink); font-weight: 600; }
-.premium { margin-top: 22px; border: 1px solid var(--line); background: var(--panel2); border-radius: 12px; padding: 12px 14px; text-align: left; cursor: pointer; width: 100%; }
+.premium { display: block; color: inherit; margin-top: 22px; border: 1px solid var(--line); background: var(--panel2); border-radius: 12px; padding: 12px 14px; text-align: left; cursor: pointer; width: 100%; }
 .premium b { display: flex; align-items: center; gap: 8px; color: var(--amber); font-family: var(--display); font-size: 17px; }
 .premium small { display: block; color: var(--mute); font-size: 13px; margin-top: 2px; }
-.premium .soon { display: none; color: var(--green); font-size: 12px; margin-top: 6px; }
-.premium.open .soon { display: block; }
+.premium.on { border-color: var(--amber); }
 .modebar { margin-top: auto; padding-top: 18px; display: flex; align-items: center; gap: 10px; color: var(--mute); }
 .switch { width: 46px; height: 26px; border-radius: 99px; border: 1px solid var(--line); background: var(--panel2); position: relative; cursor: pointer; padding: 0; }
 .switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--fg); transition: transform .2s; }
@@ -238,6 +237,28 @@ label.f input, label.f textarea, label.f select { background: var(--panel2); bor
   .notruf .num { margin-left: 0; }
   .vhead .btn span { display: none; }
 }
+/* ---------- i18n, premium, kündigen ---------- */
+html.i18n-wait body { visibility: hidden; }
+.langbar { margin-top: 14px; display: flex; align-items: center; gap: 8px; color: var(--mute); }
+.langbar select { flex: 1; min-width: 0; background: var(--panel2); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font: inherit; }
+.prem { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.prem .card { padding: 24px; display: grid; gap: 14px; }
+.prem .price { font-family: var(--display); font-size: 44px; font-weight: 800; line-height: 1; color: var(--green); }
+.prem ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.prem li { display: flex; gap: 10px; align-items: flex-start; }
+.prem li svg { color: var(--green); margin-top: 2px; }
+.prem .btn { justify-self: start; font-size: 17px; padding: 12px 20px; }
+.prem .btn[disabled] { opacity: .55; cursor: default; filter: none; }
+.codebox { display: flex; gap: 8px; }
+.codebox input { flex: 1; min-width: 0; background: var(--panel2); border: 1px solid var(--line); color: var(--fg); border-radius: 10px; padding: 10px 12px; font: inherit; font-size: 13px; }
+.okmsg { color: var(--green); font-weight: 600; }
+.paywall { padding: 18px 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; border: 1px solid var(--amber); }
+.paywall b { color: var(--amber); font-family: var(--display); font-size: 20px; }
+.paywall span { flex: 1; min-width: 200px; color: var(--mute); }
+.kform { padding: 22px; display: grid; gap: 14px; max-width: 620px; }
+@media (max-width: 860px) { .prem { grid-template-columns: 1fr; } }
+@media print { .side, .topbar, .foot, .vhead .ico, #kForm { display: none !important; } .main { margin: 0; } }
+
 /* ---------- gear, legal, footer ---------- */
 .gear { display: grid; gap: 22px; }
 .gcat h2 { font-size: 24px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
@@ -268,6 +289,10 @@ label.f input, label.f textarea, label.f select { background: var(--panel2); bor
   <symbol id="ic-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
   <symbol id="ic-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" fill="currentColor" stroke="none"/></symbol>
   <symbol id="ic-signal" viewBox="0 0 24 24"><path d="M12 12h.01"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.6 5.6a9 9 0 0 0 0 12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></symbol>
+  <symbol id="ic-snow" viewBox="0 0 24 24"><path d="M12 2v20M3.3 7l17.4 10M3.3 17 20.7 7M9 4l3 2 3-2M9 20l3-2 3 2"/></symbol>
+  <symbol id="ic-thermo" viewBox="0 0 24 24"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/></symbol>
+  <symbol id="ic-shirt" viewBox="0 0 24 24"><path d="M8 3 3 6l2 5 3-1v11h8V10l3 1 2-5-5-3a4 4 0 0 1-8 0z"/></symbol>
+  <symbol id="ic-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
   <symbol id="ic-home" viewBox="0 0 24 24"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></symbol>
   <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></symbol>
   <symbol id="ic-book" viewBox="0 0 24 24"><path d="M12 6c-2-1.6-5-2-8-1.5v14c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5v-14c-3-.5-6-.1-8 1.5z"/><path d="M12 6v14"/></symbol>
@@ -299,11 +324,11 @@ label.f input, label.f textarea, label.f select { background: var(--panel2); bor
   <aside class="side" id="side">
     <a class="brand" href="#start"><svg><use href="#ic-logo"/></svg><b>SURVIVAL <span>AI</span></b></a>
     <nav class="nav" id="nav"></nav>
-    <button class="premium" id="premium" type="button">
-      <b><svg class="i"><use href="#ic-crown"/></svg>Premium Upgrade</b>
-      <small>Mehr Funktionen für deine Sicherheit.</small>
-      <span class="soon">Kommt bald: Offline-Wissen, Touren-Check-in und mehr.</span>
-    </button>
+    <a class="premium" id="premium" href="#premium" style="text-decoration:none">
+      <b><svg class="i"><use href="#ic-crown"/></svg>Premium</b>
+      <small id="premSide">KI-Chat und Notfall-Plan freischalten.</small>
+    </a>
+    <label class="langbar"><svg class="i"><use href="#ic-globe"/></svg><select id="langSel" aria-label="Sprache"></select></label>
     <div class="modebar"><svg class="i"><use href="#ic-sun"/></svg><button class="switch" id="modeBtn" type="button" aria-label="Hell/Dunkel umschalten"></button></div>
   </aside>
   <div class="scrim" id="scrim"></div>
@@ -484,6 +509,57 @@ label.f input, label.f textarea, label.f select { background: var(--panel2); bor
       <div class="gear" id="gear"></div>
     </section>
 
+    <!-- PREMIUM -->
+    <section class="view" id="v-premium" hidden>
+      <div class="vhead">
+        <div class="ico" style="color:var(--amber)"><svg class="i"><use href="#ic-crown"/></svg></div>
+        <div class="grow"><h1>Survival AI Premium</h1><p>Deine persönliche Survival-KI, rund um die Uhr.</p></div>
+      </div>
+      <p class="okmsg" id="premWelcome" hidden>Willkommen bei Premium! Die KI ist jetzt freigeschaltet.</p>
+      <p class="err" id="premError" hidden>Die Zahlung konnte nicht bestätigt werden. Wenn Geld abgebucht wurde, schreib uns bitte (siehe Impressum).</p>
+      <div class="prem">
+        <div class="panel card">
+          <div class="price" id="premPrice">–</div>
+          <ul>
+            <li><svg class="i"><use href="#ic-check"/></svg><span>KI-Chat ohne Wartezeit: Feuer, Wasser, Unterschlupf, Erste Hilfe</span></li>
+            <li><svg class="i"><use href="#ic-check"/></svg><span>Persönlicher Notfall-Plan für deine Lage</span></li>
+            <li><svg class="i"><use href="#ic-check"/></svg><span>Antworten in deiner Sprache</span></li>
+            <li><svg class="i"><use href="#ic-check"/></svg><span>Jederzeit kündbar</span></li>
+          </ul>
+          <button class="btn" id="buyBtn" type="button"><svg class="i"><use href="#ic-crown"/></svg><span>Jetzt abonnieren</span></button>
+          <span class="note" id="buyNote"></span>
+          <div id="premActive" hidden>
+            <p class="okmsg">Dein Premium ist aktiv.</p>
+            <p class="note">Dein Zugangscode für andere Geräte (gut aufbewahren, nicht weitergeben):</p>
+            <div class="codebox"><input id="myCode" readonly><button class="btn ghost" id="copyCode" type="button">Kopieren</button></div>
+            <p><a class="btn ghost" href="/api/portal">Abo verwalten</a></p>
+          </div>
+        </div>
+        <div class="panel card">
+          <h3>Schon Premium?</h3>
+          <p class="note" style="margin:0">Gib deinen Zugangscode ein, um Premium auf diesem Gerät zu nutzen.</p>
+          <form class="codebox" id="codeForm"><input id="codeIn" placeholder="Zugangscode" autocomplete="off"><button class="btn" type="submit">Freischalten</button></form>
+          <span class="note" id="codeNote"></span>
+          <p class="note">Die Wissensdatenbank, Erste Hilfe, Karte, Ausrüstung und dein Profil bleiben kostenlos.</p>
+        </div>
+      </div>
+      <p class="note">Im Notfall immer zuerst 112 anrufen. Die KI ersetzt keinen Rettungsdienst.</p>
+    </section>
+
+    <!-- KÜNDIGEN -->
+    <section class="view" id="v-kuendigen" hidden>
+      <div class="vhead"><div class="grow"><h1>Verträge hier kündigen</h1><p>Kündige dein Premium-Abo ohne Anmeldung.</p></div></div>
+      <form class="panel kform" id="kForm">
+        <label class="f">Name <input id="kName" required autocomplete="name"></label>
+        <label class="f">E-Mail-Adresse deines Abos <input id="kMail" type="email" required autocomplete="email"></label>
+        <label class="f">Art der Kündigung <select id="kKind"><option value="ordentlich">Ordentliche Kündigung</option><option value="ausserordentlich">Außerordentliche Kündigung</option></select></label>
+        <p class="note" style="margin:0">Das Abo endet zum nächstmöglichen Zeitpunkt, also am Ende des bereits bezahlten Zeitraums.</p>
+        <button class="btn" type="submit" style="justify-self:start">Jetzt kündigen</button>
+        <span class="err" id="kErr"></span>
+      </form>
+      <div class="panel kform" id="kDone" hidden></div>
+    </section>
+
     <!-- IMPRESSUM -->
     <section class="view" id="v-impressum" hidden>
       <div class="vhead"><div class="grow"><h1>Impressum</h1></div></div>
@@ -500,7 +576,7 @@ label.f input, label.f textarea, label.f select { background: var(--panel2); bor
       <span>© <span id="year"></span> Survival AI · Die KI ersetzt keinen Rettungsdienst. Im Notfall: <b style="color:var(--red)">112</b></span>
       <nav>
         <button type="button" id="shareBtn"><svg class="i"><use href="#ic-share"/></svg><span>Seite teilen</span></button>
-        <a href="#ausruestung">Ausrüstung</a><a href="#impressum">Impressum</a><a href="#datenschutz">Datenschutz</a>
+        <a href="#premium">Premium</a><a href="#ausruestung">Ausrüstung</a><a href="#impressum">Impressum</a><a href="#datenschutz">Datenschutz</a><a href="#kuendigen">Verträge hier kündigen</a>
       </nav>
     </footer>
   </div>
@@ -515,6 +591,38 @@ const CONFIG = {
   amazonTag: "",
   impressum: { name: "", street: "", city: "", email: "", phone: "" },
 };
+
+/* ===================== Sprachen =====================
+   Übersetzungen liegen als einfache Wörterbücher (deutscher Text → Übersetzung) in /i18n/<sprache>.json.
+   Fehlt ein Eintrag, bleibt der deutsche Text stehen. */
+const LANGS = { de: "Deutsch", en: "English", es: "Español", fr: "Français", it: "Italiano", pl: "Polski", tr: "Türkçe", uk: "Українська" };
+let LANG = (() => { try { const l = localStorage.getItem("sai:lang"); if (l) return JSON.parse(l); } catch {} const n = (navigator.language || "de").slice(0, 2); return LANGS[n] ? n : "de"; })();
+if (!LANGS[LANG]) LANG = "de";
+let DICT = {};
+const t = (x) => DICT[x] || x;
+document.documentElement.lang = LANG;
+const SKIP = new Set(["SCRIPT", "STYLE", "TEXTAREA", "svg", "use"]);
+function trNode(root) {
+  if (LANG === "de" || !root) return;
+  if (root.nodeType === 3) { const p = root.parentElement; if (p && !p.closest(".md, .tx, #idcard dd, #myCode")) { const k = root.nodeValue.trim(); if (k && DICT[k]) root.nodeValue = root.nodeValue.replace(k, DICT[k]); } return; }
+  if (root.nodeType !== 1) return;
+  for (const at of ["placeholder", "aria-label", "title"]) { const v = root.getAttribute?.(at); if (v && DICT[v]) root.setAttribute(at, DICT[v]); }
+  if (SKIP.has(root.nodeName) || root.closest?.(".md, .tx")) return;
+  for (const c of root.childNodes) trNode(c);
+}
+if (LANG !== "de") {
+  document.documentElement.classList.add("i18n-wait");
+  const done = () => document.documentElement.classList.remove("i18n-wait");
+  setTimeout(done, 2500);
+  fetch("/i18n/" + LANG + ".json").then(r => r.ok ? r.json() : {}).catch(() => ({})).then(d => {
+    DICT = d || {};
+    trNode(document.body);
+    document.title = t(document.title.replace(/ – Survival AI$/, "")) + (document.title.endsWith(" – Survival AI") ? " – Survival AI" : "");
+    route();
+    new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(trNode))).observe(document.body, { childList: true, subtree: true });
+    done();
+  });
+}
 
 /* ===================== Daten ===================== */
 const NAV = [
@@ -601,6 +709,20 @@ const ARTICLES = [
       "Vorrat regelmäßig prüfen und ältere Lebensmittel zuerst verbrauchen."],
     warn: "Campingkocher oder Grill nie in geschlossenen Räumen benutzen: Lebensgefahr durch Kohlenmonoxid.",
     ask: "Was gehört in einen Notvorrat für eine Familie mit vier Personen?", gear: "vorrat" },
+  {"id": "unterkuehlung", "icon": "snow", "title": "Unterkühlung", "sub": "Erkennen & richtig handeln", "bg": "radial-gradient(circle at 50% 70%, #7fd3ff, #1c4f7a 45%, #081420)", "color": "#e2f5ff", "pts": ["Warnzeichen: starkes Zittern, kalte und blasse Haut, Müdigkeit, Ungeschicklichkeit, Verwirrtheit. Hört das Zittern bei großer Kälte auf, ist das ein Alarmzeichen.", "Die Person aus Wind, Nässe und Kälte bringen. Nasse Kleidung vorsichtig gegen trockene tauschen.", "Vom Boden isolieren (Isomatte, Rucksack, Laub) und in Decken oder eine Rettungsdecke einwickeln, auch den Kopf.", "Nur wer wach ist und sicher schlucken kann, bekommt warme, gezuckerte Getränke. Kein Alkohol.", "Arme und Beine nicht reiben oder massieren und die Person möglichst wenig bewegen.", "Bei Verwirrtheit, Bewusstlosigkeit oder fehlendem Zittern trotz Kälte: sofort 112."], "warn": "Bei Bewusstlosigkeit mit normaler Atmung: stabile Seitenlage und weiter wärmen. Ohne normale Atmung: Herzdruckmassage.", "ask": "Mein Wanderpartner zittert stark und redet wirr. Was soll ich tun?", "gear": "schutz"},
+  {"id": "hitze", "icon": "sun", "title": "Hitze & Hitzschlag", "sub": "Überhitzung vermeiden", "bg": "radial-gradient(circle at 50% 70%, #ffd25a, #a8521a 45%, #1e0f06)", "color": "#fff1c4", "pts": ["Bei Hitze früh am Morgen losgehen und die Mittagszeit im Schatten verbringen.", "Regelmäßig trinken, bevor Durst kommt. Bei starkem Schwitzen auch Salz zuführen (z. B. salzige Snacks).", "Kopfbedeckung, helle und luftige Kleidung und Sonnenschutz tragen.", "Warnzeichen für Hitzeerschöpfung: Kopfschmerzen, Schwindel, Übelkeit, Schwäche. Dann sofort Pause im Schatten, Beine hoch, trinken.", "Hitzschlag ist lebensgefährlich: heiße Haut, Verwirrtheit, Krampfanfall oder Bewusstlosigkeit. Sofort 112 rufen.", "Bis der Rettungsdienst kommt: in den Schatten bringen, Kleidung öffnen, mit nassen Tüchern und Luftzufuhr kühlen."], "warn": "Einer verwirrten oder bewusstlosen Person nichts zu trinken geben (Erstickungsgefahr).", "ask": "Wie viel Wasser brauche ich für eine Tageswanderung bei 30 Grad?", "gear": "wasser"},
+  {"id": "erfrierungen", "icon": "snow", "title": "Erfrierungen", "sub": "Finger, Zehen, Gesicht", "bg": "radial-gradient(circle at 50% 70%, #b8e8ff, #3a6a8a 45%, #0a1620)", "color": "#ffffff", "pts": ["Gefährdet sind vor allem Finger, Zehen, Nase, Ohren und Wangen, besonders bei Wind und Nässe.", "Warnzeichen: Die Haut wird weiß oder grau-gelb, hart und gefühllos.", "Vorbeugen: trockene Kleidung, Handschuhe, keine engen Schuhe, regelmäßig Finger und Zehen bewegen.", "Betroffene Stellen nicht mit Schnee abreiben und nicht massieren.", "Langsam mit Körperwärme aufwärmen, z. B. Hände in die Achseln. Nicht direkt an Feuer oder Heizung halten.", "Erst aufwärmen, wenn kein erneutes Erfrieren droht. Blasen nicht öffnen und ärztlich behandeln lassen."], "warn": "Erfrierungen treten oft zusammen mit Unterkühlung auf. Die Unterkühlung hat Vorrang.", "ask": "Meine Finger sind bei der Wintertour weiß und taub geworden. Was soll ich tun?", "gear": "schutz"},
+  {"id": "zecken", "icon": "warn", "title": "Zecken", "sub": "Schutz & richtig entfernen", "bg": "radial-gradient(circle at 50% 70%, #c08a5a, #5a3a1a 45%, #140c06)", "color": "#ffe6cc", "pts": ["Zecken sitzen in Gras und Gebüsch. Lange Kleidung, Hosenbeine in die Socken und Zeckenschutzmittel helfen.", "Nach jedem Aufenthalt in der Natur den ganzen Körper absuchen, besonders Kniekehlen, Leiste, Achseln und Haaransatz.", "Zecke schnell entfernen: mit Zeckenzange oder Pinzette nah an der Haut greifen und langsam gerade herausziehen.", "Kein Öl, Kleber oder Feuer verwenden. Die Zecke dadurch nicht quetschen.", "Stelle desinfizieren und die nächsten Wochen beobachten. Bildet sich ein wachsender roter Ring (Wanderröte) oder kommen grippeähnliche Beschwerden: zum Arzt.", "In FSME-Risikogebieten empfiehlt das Robert Koch-Institut eine Impfung. Frag deine Hausarztpraxis."], "ask": "Ich habe eine Zecke entdeckt und keine Pinzette dabei. Was kann ich tun?", "gear": "notfall"},
+  {"id": "schlangenbiss", "icon": "warn", "title": "Schlangenbiss", "sub": "Kreuzotter & Co.", "bg": "radial-gradient(circle at 50% 70%, #9ac25a, #3a5a1a 45%, #0c1406)", "color": "#eaffc8", "pts": ["In Deutschland sind Bisse selten. Die Kreuzotter ist scheu und beißt nur, wenn sie sich bedroht fühlt.", "Vorbeugen: feste Schuhe und lange Hosen, auf Wegen bleiben, nicht unter Steine oder in Spalten greifen.", "Nach einem Biss: Ruhe bewahren und die gebissene Person beruhigen und hinsetzen oder hinlegen.", "Den betroffenen Körperteil ruhig stellen. Ringe, Uhren und enge Kleidung entfernen, bevor es anschwillt.", "Sofort 112 oder einen Giftnotruf anrufen.", "Nicht aussaugen, nicht einschneiden, nicht abbinden und nicht kühlen."], "warn": "Die Schlange nicht fangen oder töten. Ein Foto aus sicherer Entfernung reicht den Ärzten.", "ask": "Was mache ich, wenn mein Hund oder ich von einer Kreuzotter gebissen werden?", "gear": "notfall"},
+  {"id": "wildtiere", "icon": "tree", "title": "Wildtiere", "sub": "Wildschwein, Wolf & Co.", "bg": "radial-gradient(circle at 50% 70%, #a8b06a, #4a4a22 45%, #12120a)", "color": "#f4f2d0", "pts": ["Wildtiere meiden Menschen meist. Wer auf Wegen bleibt und Hunde anleint, hat selten Probleme.", "Wildschweine: Bachen mit Frischlingen sind gefährlich. Ruhig und langsam zurückziehen und dem Tier einen Fluchtweg lassen.", "Wolf: stehen bleiben, auf dich aufmerksam machen (laut sprechen, groß machen) und dich langsam zurückziehen. Nicht wegrennen und nie füttern.", "Keine Jungtiere anfassen. Die Mutter ist meist in der Nähe.", "Essensreste immer mitnehmen. Sie locken Tiere an.", "In Bärengebieten im Ausland: die örtlichen Regeln kennen und Lebensmittel bärensicher lagern."], "ask": "Mir ist beim Wandern ein Wolf begegnet. Wie verhalte ich mich richtig?"},
+  {"id": "tourenplanung", "icon": "map", "title": "Tour sicher planen", "sub": "Bevor du losgehst", "bg": "radial-gradient(circle at 50% 70%, #6ad69a, #1a6a42 45%, #06140c)", "color": "#d6ffe8", "pts": ["Sag jemandem Bescheid: Route, Ziel und wann du spätestens zurück bist. Melde dich, wenn du angekommen bist.", "Wetterbericht prüfen und auf Gewitterwarnungen achten. Im Gebirge ändert sich das Wetter schnell.", "Plane so, dass du vor Sonnenuntergang zurück bist, und nimm eine Stirnlampe mit.", "Wähle eine Tour, die zu deiner Kondition passt, und plane Umkehrpunkte ein.", "Handy voll laden, Offline-Karte herunterladen und eine Powerbank einpacken.", "Grundausrüstung: Wasser, Essen, Regenjacke, warme Schicht, Erste-Hilfe-Set, Rettungsdecke, Pfeife."], "ask": "Ich plane meine erste Tageswanderung allein. Worauf muss ich achten?", "gear": "notfall"},
+  {"id": "kleidung", "icon": "shirt", "title": "Richtige Kleidung", "sub": "Das Zwiebelprinzip", "bg": "radial-gradient(circle at 50% 70%, #5a9aff, #1a3a8a 45%, #060c1a)", "color": "#dce8ff", "pts": ["Zwiebelprinzip: mehrere dünne Schichten statt einer dicken. So kannst du dich anpassen.", "Innen: Funktionswäsche oder Wolle, die Schweiß nach außen leitet.", "Mitte: Fleece oder eine leichte Daunen- bzw. Kunstfaserjacke als Wärmeschicht.", "Außen: wind- und wasserdichte Jacke.", "Baumwolle meiden: Sie saugt sich voll, trocknet langsam und kühlt stark aus.", "Mütze und Handschuhe gehören bei Kälte immer dazu. Ersatzsocken trocken verpacken."], "ask": "Was soll ich bei 0 Grad und Regen zum Wandern anziehen?", "gear": "schutz"},
+  {"id": "stromausfall", "icon": "bolt", "title": "Stromausfall", "sub": "Wenn das Licht ausgeht", "bg": "radial-gradient(circle at 50% 70%, #ffe25a, #8a7a12 45%, #16140a)", "color": "#fff8c8", "pts": ["Taschenlampen statt Kerzen nutzen. Kerzen nie unbeaufsichtigt lassen.", "Informationen über ein Batterie- oder Kurbelradio erhalten. Warnungen kommen auch über die Warn-Apps NINA und Cell Broadcast.", "Elektrogeräte ausstecken, damit beim Wiederkehr des Stroms nichts beschädigt wird. Eine Lampe eingeschaltet lassen, um die Rückkehr zu bemerken.", "Kühlschrank und Gefriertruhe geschlossen halten, damit sie lange kalt bleiben.", "Nach Nachbarn sehen, besonders nach älteren oder kranken Menschen.", "Im Notfall ohne Telefon: Feuerwehr- und Polizeiwachen sind Anlaufstellen."], "warn": "Gas- oder Holzkohlegrills, Campingkocher und Notstromaggregate nie in Innenräumen betreiben: Kohlenmonoxid ist geruchlos und tödlich.", "ask": "Was sollte ich vorbereiten, falls der Strom mehrere Tage ausfällt?", "gear": "vorrat"},
+  {"id": "hochwasser", "icon": "drop", "title": "Hochwasser", "sub": "Bei Starkregen & Flut", "bg": "radial-gradient(circle at 50% 70%, #4ab8d6, #145a6a 45%, #061418)", "color": "#cff6ff", "pts": ["Warnungen ernst nehmen (Warn-Apps, Radio) und Anweisungen der Behörden sofort befolgen.", "Nie durch Hochwasser gehen oder fahren. Schon kniehohes, fließendes Wasser kann dich umreißen, und Fahrbahnen können unterspült sein.", "Keller und Tiefgaragen bei Hochwasser nicht betreten: Lebensgefahr durch Ertrinken und Strom.", "Nach oben gehen: in höhere Stockwerke oder auf erhöhtes Gelände.", "Strom im betroffenen Bereich abschalten, wenn das gefahrlos möglich ist.", "Hochwasser ist oft verschmutzt. Nicht trinken und Kontakt mit Wunden vermeiden."], "ask": "Bei uns gibt es eine Unwetterwarnung mit Starkregen. Was soll ich jetzt tun?", "gear": "vorrat"},
+  {"id": "notgepaeck", "icon": "bag", "title": "Notgepäck", "sub": "Der gepackte Rucksack", "bg": "radial-gradient(circle at 50% 70%, #d68a5a, #6a3a1a 45%, #180c06)", "color": "#ffe2cc", "pts": ["Das BBK empfiehlt für jede Person einen Rucksack, den du im Notfall sofort greifen kannst.", "Dokumente: Ausweis, Versicherungsunterlagen, Kopien wichtiger Papiere in einer wasserdichten Mappe.", "Persönliche Medikamente und ein Erste-Hilfe-Set.", "Wasser und haltbare Lebensmittel für zwei Tage, Besteck und Becher.", "Batterieradio, Taschenlampe, Ersatzbatterien, Powerbank und Ladekabel.", "Warme Kleidung, Regenschutz, Decke oder Schlafsack, Hygieneartikel und etwas Bargeld."], "ask": "Kannst du mir eine Packliste für einen Notfall-Rucksack für zwei Personen machen?", "gear": "vorrat"},
+  {"id": "waldbrand", "icon": "fire", "title": "Waldbrand", "sub": "Vorbeugen & richtig reagieren", "bg": "radial-gradient(circle at 50% 70%, #ff7a3a, #8a2a0e 45%, #1a0a06)", "color": "#ffd8c2", "pts": ["Die meisten Waldbrände entstehen durch Menschen. Im Wald nicht rauchen und kein offenes Feuer machen.", "Den Waldbrandgefahrenindex des Deutschen Wetterdienstes beachten. Bei hohen Stufen gelten oft Betretungsverbote.", "Rauch oder Feuer gesehen? Sofort 112 anrufen und den Ort möglichst genau beschreiben.", "Entferne dich quer zur Windrichtung vom Feuer und nicht bergauf. Feuer breitet sich bergauf schneller aus.", "Rettungswege und Waldwege für die Feuerwehr freihalten, nicht davor parken.", "Ist der Weg abgeschnitten: Schutz auf bereits verbrannten Flächen, in Gewässern oder auf großen, kahlen Flächen suchen."], "ask": "Ich rieche Rauch beim Wandern im Wald. Was soll ich tun?"},
+  {"id": "winter", "icon": "snow", "title": "Unterwegs im Winter", "sub": "Schnee, Eis & Lawinen", "bg": "radial-gradient(circle at 50% 70%, #d6e8ff, #5a6a8a 45%, #0e1018)", "color": "#ffffff", "pts": ["Im Winter sind die Tage kurz. Plane die Tour so, dass du lange vor der Dunkelheit zurück bist.", "Vor Touren im Gebirge den Lawinenlagebericht lesen. Abseits gesicherter Pisten nur mit Ausbildung gehen.", "Für Gelände mit Lawinengefahr gehören Verschütteten-Suchgerät, Schaufel und Sonde in den Rucksack. Ihren Gebrauch musst du üben.", "Zugefrorene Seen nur betreten, wenn sie offiziell freigegeben sind.", "Bricht jemand ein: 112 rufen, nicht selbst aufs Eis laufen, sondern vom Ufer mit langen Gegenständen helfen.", "Warme Getränke in der Thermosflasche und eine Rettungsdecke mitnehmen."], "warn": "Bei einem Lawinenabgang sofort 112 rufen und, wenn ausgebildet, die Kameradenrettung starten. Die ersten Minuten entscheiden.", "ask": "Worauf muss ich bei einer Winterwanderung im Mittelgebirge achten?", "gear": "schutz"},
+  {"id": "kinder", "icon": "user", "title": "Kinder in der Natur", "sub": "Wenn ein Kind verloren geht", "bg": "radial-gradient(circle at 50% 70%, #ff9ad6, #8a2a6a 45%, #1a0614)", "color": "#ffe2f4", "pts": ["Bring Kindern bei: Wenn du dich verlaufen hast, bleib stehen, umarme einen Baum und warte. So findet man sie schneller.", "Jedes Kind bekommt eine Pfeife und lernt: dreimal pfeifen heißt „Ich brauche Hilfe“.", "Helle, auffällige Kleidung macht Kinder leichter sichtbar.", "Notiere deine Handynummer auf einem Zettel oder Armband des Kindes.", "Vereinbart einen Treffpunkt, falls ihr euch verliert.", "Wird ein Kind vermisst: nicht lange allein suchen, sondern früh 112 rufen. Jede Minute zählt."], "ask": "Wie bereite ich meine Kinder auf eine Wanderung vor, damit sie sich nicht verlaufen?", "gear": "notfall"}
 ];
 const GEAR = [
   { id: "notfall", icon: "warn", title: "Notfall & Erste Hilfe", items: [
@@ -746,10 +868,11 @@ async function askAI(turns, onText, signal) {
   }
   let res;
   try {
-    res = await fetch("/api/chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: turns }), signal });
+    res = await fetch("/api/chat?lang=" + LANG, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: turns }), signal });
   } catch (e) {
     const err = new Error(window.claude ? "In dieser Ansicht ist keine KI verfügbar." : "Keine Verbindung zum Server."); err.cancelled = e?.name === "AbortError"; throw err;
   }
+  if (res.status === 402) { const err = new Error("premium"); err.premium = true; throw err; }
   if (!res.ok || !res.body) { throw new Error((await res.text().catch(() => "")) || "Fehler " + res.status); }
   const reader = res.body.getReader(), dec = new TextDecoder(); let acc = "";
   try {
@@ -760,14 +883,15 @@ async function askAI(turns, onText, signal) {
 
 /* ===================== Navigation ===================== */
 $("nav").innerHTML = NAV.map(([id, label, ic]) => `<a href="#${id}" data-v="${id}">${icon(ic)}${label}</a>`).join("");
-const VIEWS = [...NAV.map(n => n[0]), "impressum", "datenschutz"];
-const TITLES = { start: "Survival AI – Dein KI-Überlebens-Guide", impressum: "Impressum – Survival AI", datenschutz: "Datenschutz – Survival AI" };
+const VIEWS = [...NAV.map(n => n[0]), "premium", "kuendigen", "impressum", "datenschutz"];
+const TITLES = { start: "Survival AI – Dein KI-Überlebens-Guide", premium: "Premium", kuendigen: "Verträge hier kündigen", impressum: "Impressum", datenschutz: "Datenschutz" };
 let gearJump = null;
 function route() {
   let v = location.hash.slice(1);
   if (!VIEWS.includes(v)) v = "start";
   VIEWS.forEach((id) => { $("v-" + id).hidden = id !== v; });
-  document.title = TITLES[v] || (NAV.find(n => n[0] === v)?.[1] || "") + " – Survival AI";
+  document.title = v === "start" ? t(TITLES.start) : t(TITLES[v] || NAV.find(n => n[0] === v)?.[1] || "") + " – Survival AI";
+  document.querySelector(".premium")?.classList.toggle("on", v === "premium");
   document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("on", a.dataset.v === v));
   document.body.classList.remove("menu");
   window.scrollTo(0, 0);
@@ -778,14 +902,13 @@ function route() {
 window.addEventListener("hashchange", route);
 $("burger").onclick = () => document.body.classList.add("menu");
 $("scrim").onclick = () => document.body.classList.remove("menu");
-$("premium").onclick = () => $("premium").classList.toggle("open");
 const setMode = (m) => { document.documentElement.dataset.mode = m; store.set("mode", m); };
 setMode(store.get("mode", "dark"));
 $("modeBtn").onclick = () => setMode(document.documentElement.dataset.mode === "light" ? "dark" : "light");
 
 /* ===================== Startseite ===================== */
 $("tiles").innerHTML = TILES.map(([ic, label], i) => `<button type="button" class="tile" data-i="${i}">${icon(ic)}${label}</button>`).join("");
-$("tiles").onclick = (e) => { const b = e.target.closest(".tile"); if (!b) return; const p = TILES[b.dataset.i][2]; p.startsWith("#") ? (location.hash = p) : startChat(p); };
+$("tiles").onclick = (e) => { const b = e.target.closest(".tile"); if (!b) return; const p = TILES[b.dataset.i][2]; p.startsWith("#") ? (location.hash = p) : startChat(t(p)); };
 $("askForm").onsubmit = (e) => { e.preventDefault(); const v = $("askInput").value.trim(); $("askInput").value = ""; v ? startChat(v) : (location.hash = "chat"); };
 $("askInput").onkeydown = (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); $("askForm").requestSubmit(); } };
 
@@ -794,7 +917,7 @@ let turns = [], busy = false, ctl = null;
 function starter() {
   $("msgs").innerHTML = `<div class="starter"><h2 style="font-size:28px">Wobei brauchst du Hilfe?</h2><div class="chips">${TILES.filter(t => !t[2].startsWith("#")).map(t => `<button type="button" class="chip" data-p="${esc(t[2])}">${t[1]}</button>`).join("")}</div></div>`;
 }
-$("msgs").onclick = (e) => { const c = e.target.closest(".chip"); if (c) send(c.dataset.p); };
+$("msgs").onclick = (e) => { const c = e.target.closest(".chip"); if (c) send(t(c.dataset.p)); };
 starter();
 function startChat(q) { location.hash = "chat"; send(q); }
 async function send(text) {
@@ -815,7 +938,7 @@ async function send(text) {
     out.innerHTML = md(answer); turns.push({ role: "assistant", content: answer });
   } catch (e) {
     turns.pop();
-    out.innerHTML = (e.partial ? md(e.partial) : "") + (e.cancelled ? (e.partial ? "" : `<p class="err">Abgebrochen.</p>`) : `<p class="err">${esc(e.message)} Bei einem echten Notfall: 112 anrufen.</p>`);
+    out.innerHTML = e.premium ? paywallHTML() : (e.partial ? md(e.partial) : "") + (e.cancelled ? (e.partial ? "" : `<p class="err">Abgebrochen.</p>`) : `<p class="err">${esc(e.message)}</p><p class="err">Bei einem echten Notfall: 112 anrufen.</p>`);
   } finally {
     a.querySelector(".time").textContent = now();
     busy = false; ctl = null; syncSend();
@@ -835,7 +958,7 @@ $("newChat").onclick = () => { ctl?.abort(); turns = []; starter(); $("chatInput
 /* ===================== Wissensdatenbank ===================== */
 function renderK(filter = "") {
   const f = filter.toLowerCase();
-  const list = ARTICLES.filter(a => !f || (a.title + " " + a.sub + " " + (a.pts || []).join(" ")).toLowerCase().includes(f));
+  const list = ARTICLES.filter(a => !f || [a.title, a.sub, ...(a.pts || [])].map(x => x + " " + t(x)).join(" ").toLowerCase().includes(f));
   $("kgrid").innerHTML = list.length ? list.map(a => `<button type="button" class="kcard" data-id="${a.id}"><span class="art" style="background:${a.bg};color:${a.color}">${icon(a.icon)}</span><span class="cap"><h3>${a.title}</h3><small>${a.sub}</small></span></button>`).join("")
     : `<p class="note">Nichts gefunden. Frag einfach den <a href="#chat">AI-Chat</a>.</p>`;
 }
@@ -845,10 +968,10 @@ $("kgrid").onclick = (e) => {
   const c = e.target.closest(".kcard"); if (!c) return;
   const a = ARTICLES.find(x => x.id === c.dataset.id);
   if (a.link) { location.hash = a.link; return; }
-  $("article").innerHTML = `<button type="button" class="btn ghost back" id="kBack">← Alle Themen</button><h2>${a.title}</h2><ul>${a.pts.map(p => `<li>${esc(p)}</li>`).join("")}</ul>${a.warn ? `<div class="warn">${esc(a.warn)}</div>` : ""}<button type="button" class="btn art-ask" id="kAsk">${icon("chat")}KI fragen: ${esc(a.ask)}</button>${a.gear ? `<a class="btn ghost art-gear" href="#ausruestung" data-g="${a.gear}">${icon("bag")}Passende Ausrüstung</a>` : ""}`;
+  $("article").innerHTML = `<button type="button" class="btn ghost back" id="kBack">← Alle Themen</button><h2>${a.title}</h2><ul>${a.pts.map(p => `<li>${esc(p)}</li>`).join("")}</ul>${a.warn ? `<div class="warn">${esc(a.warn)}</div>` : ""}<button type="button" class="btn art-ask" id="kAsk">${icon("chat")}KI fragen: <span>${esc(a.ask)}</span></button>${a.gear ? `<a class="btn ghost art-gear" href="#ausruestung" data-g="${a.gear}">${icon("bag")}Passende Ausrüstung</a>` : ""}`;
   $("kgrid").hidden = true; $("article").hidden = false;
   $("kBack").onclick = () => { $("article").hidden = true; $("kgrid").hidden = false; };
-  $("kAsk").onclick = () => startChat(a.ask);
+  $("kAsk").onclick = () => startChat(t(a.ask));
 };
 
 /* ===================== Karte ===================== */
@@ -914,7 +1037,7 @@ Wetter: ${$("pWeather").value}`;
   out.scrollIntoView({ behavior: "smooth", block: "start" });
   planBusy = true;
   try { const t = await askAI([{ role: "user", content: prompt }], (t) => { out.innerHTML = md(t); }); out.innerHTML = md(t); }
-  catch (err) { out.innerHTML = (err.partial ? md(err.partial) : "") + `<p class="err">${esc(err.message)}</p>`; }
+  catch (err) { out.innerHTML = err.premium ? paywallHTML() : (err.partial ? md(err.partial) : "") + `<p class="err">${esc(err.message)}</p>`; }
   finally { planBusy = false; }
 };
 
@@ -953,6 +1076,71 @@ $("datenschutz").innerHTML = `<h2>1. Verantwortlicher</h2><p>${owner}</p>
 <h2>6. Schriftarten</h2><p>Für die Darstellung laden wir Schriftarten von Google Fonts (Google Ireland Ltd.). Dabei wird deine IP-Adresse an Google übertragen.</p>
 <h2>7. Deine Rechte</h2><p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch sowie das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Wende dich dafür an die oben genannte Adresse.</p>
 <p class="note">Stand: November 2026</p>`;
+
+/* ===================== Sprache wählen ===================== */
+$("langSel").innerHTML = Object.entries(LANGS).map(([k, v]) => `<option value="${k}"${k === LANG ? " selected" : ""}>${v}</option>`).join("");
+$("langSel").onchange = (e) => { try { localStorage.setItem("sai:lang", JSON.stringify(e.target.value)); } catch {} location.reload(); };
+
+/* ===================== Premium ===================== */
+let PREMIUM = { configured: false, premium: false, price: null, code: null };
+function paywallHTML() {
+  return `<div class="panel paywall"><b>${t("Premium nötig")}</b><span>${t("Der KI-Chat und der Notfall-Plan sind Teil von Premium. Die Wissensdatenbank und Erste Hilfe bleiben kostenlos.")}</span><a class="btn" href="#premium">${icon("crown")}${t("Premium ansehen")}</a></div>`;
+}
+function renderPremium() {
+  const p = PREMIUM;
+  $("premPrice").textContent = p.price || (p.configured ? "–" : t("Bald verfügbar"));
+  $("buyBtn").hidden = p.premium;
+  $("buyBtn").disabled = !p.configured;
+  $("buyNote").textContent = p.configured ? (p.premium ? "" : t("Sichere Zahlung über Stripe. Monatlich kündbar.")) : t("Das Abo startet in Kürze.");
+  $("premActive").hidden = !p.premium;
+  $("myCode").value = p.code || "";
+  $("premSide").textContent = p.premium ? t("Aktiv. Danke für deine Unterstützung!") : t("KI-Chat und Notfall-Plan freischalten.");
+}
+async function loadPremium() {
+  if (window.claude?.use) { PREMIUM = { configured: true, premium: true, price: null, code: null }; renderPremium(); return; } // Claude-Vorschau
+  try { const r = await fetch("/api/access", { cache: "no-store" }); if (r.ok) PREMIUM = await r.json(); } catch {}
+  renderPremium();
+}
+const qs = new URLSearchParams(location.search);
+if (qs.get("willkommen")) $("premWelcome").hidden = false;
+if (qs.get("fehler")) $("premError").hidden = false;
+if (qs.toString()) history.replaceState(null, "", location.pathname + location.hash);
+$("buyBtn").onclick = async () => {
+  $("buyBtn").disabled = true; $("buyNote").textContent = t("Weiterleitung zu Stripe …");
+  try {
+    const r = await fetch("/api/checkout", { method: "POST" });
+    if (!r.ok) throw new Error(await r.text());
+    location.href = (await r.json()).url;
+  } catch (e) { $("buyNote").textContent = e.message || t("Fehler. Bitte versuch es erneut."); $("buyBtn").disabled = false; }
+};
+$("copyCode").onclick = async () => { try { await navigator.clipboard.writeText($("myCode").value); $("copyCode").textContent = t("Kopiert!"); } catch { $("myCode").select(); } };
+$("codeForm").onsubmit = async (e) => {
+  e.preventDefault(); const code = $("codeIn").value.trim(); if (!code) return;
+  $("codeNote").textContent = "…";
+  try {
+    const r = await fetch("/api/access", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code }) });
+    if (!r.ok) throw new Error(await r.text());
+    $("codeNote").textContent = t("Freigeschaltet!"); $("codeIn").value = ""; await loadPremium();
+  } catch (err) { $("codeNote").textContent = t(err.message) || t("Fehler. Bitte versuch es erneut."); }
+};
+loadPremium();
+
+/* ===================== Kündigen (§ 312k BGB) ===================== */
+$("kForm").onsubmit = async (e) => {
+  e.preventDefault(); $("kErr").textContent = "";
+  const body = { name: $("kName").value, email: $("kMail").value, kind: $("kKind").value };
+  try {
+    const r = await fetch("/api/cancel", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    if (!r.ok) throw new Error(await r.text());
+    const d = await r.json();
+    $("kForm").hidden = true; $("kDone").hidden = false;
+    $("kDone").innerHTML = `<h3 class="okmsg">${t("Deine Kündigung ist eingegangen.")}</h3>
+      <p>${t("Eingang")}: <b>${esc(d.received)}</b><br>${t("Name")}: ${esc(body.name)}<br>${t("E-Mail")}: ${esc(body.email)}<br>${t("Art")}: ${esc(t(d.kind === "außerordentlich" ? "Außerordentliche Kündigung" : "Ordentliche Kündigung"))}</p>
+      <p>${d.ends.length ? t("Dein Abo endet am") + " <b>" + esc(d.ends.join(", ")) + "</b>." : t("Falls zu dieser E-Mail-Adresse ein Abo besteht, endet es zum Ende des bezahlten Zeitraums.")}</p>
+      <p class="note">${t("Bitte speichere oder drucke diese Bestätigung.")}</p>
+      <button class="btn ghost" type="button" onclick="print()" style="justify-self:start">${t("Bestätigung drucken / speichern")}</button>`;
+  } catch (err) { $("kErr").textContent = t(err.message) || t("Fehler. Bitte versuch es erneut."); }
+};
 
 /* ===================== Fußzeile ===================== */
 $("year").textContent = new Date().getFullYear();
