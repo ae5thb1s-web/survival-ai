@@ -46,3 +46,19 @@ Oben im `<script>` von `site/site.html` steht `CONFIG`:
 - `impressum`: Name, Straße, PLZ/Ort, E-Mail (Pflicht in Deutschland). Sie erscheinen im Impressum und in der Datenschutzerklärung.
 
 Google-Optimierung (Titel, Beschreibung, Vorschaubild `public/og.png`, `robots.txt`, `sitemap.xml`, App-Icons) erzeugt `site/build.mjs`.
+
+## Premium-Abo (Stripe)
+
+Der KI-Chat und der Notfall-Plan funktionieren nur mit aktivem Abo. Ohne Stripe-Einstellungen ist die KI gesperrt (kein API-Guthaben wird verbraucht).
+
+Umgebungsvariablen in Hostinger (Web-App → Einstellungen → Umgebungsvariablen):
+
+- `STRIPE_SECRET_KEY`: geheimer Schlüssel aus Stripe (Entwickler → API-Schlüssel)
+- `STRIPE_PRICE_ID`: ID des monatlichen Preises (`price_...`) deines Produkts „Survival AI Premium“
+- optional `STRIPE_PORTAL_LOGIN_URL`: Link zum Stripe-Kundenportal
+
+Routen: `/api/access` (Status, Zugangscode), `/api/checkout` (+ `/success`), `/api/portal`, `/api/cancel` (Kündigungsbutton nach § 312k BGB).
+
+## Sprachen
+
+Übersetzungen liegen in `public/i18n/<sprache>.json` (deutscher Text → Übersetzung). Fehlt ein Eintrag, bleibt Deutsch stehen.
