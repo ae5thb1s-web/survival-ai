@@ -37,3 +37,12 @@ Den API-Schlüssel bekommst du unter https://console.anthropic.com/ (Settings �
 - Texte, Themen, Wissensartikel, Erste-Hilfe-Inhalte, Karte: Abschnitt „Daten“ im Skript von `site/site.html`
 - Farben: Block `:root` oben in `site/site.html`
 - Modell / Antwortlänge: `app/api/chat/route.ts`
+
+## Geld verdienen und Pflichtangaben
+
+Oben im `<script>` von `site/site.html` steht `CONFIG`:
+
+- `amazonTag`: deine Amazon-PartnerNet-ID (z. B. `deinname-21`). Dann bekommen alle Links auf der Seite „Ausrüstung“ deine Provision, und der Werbehinweis erscheint automatisch.
+- `impressum`: Name, Straße, PLZ/Ort, E-Mail (Pflicht in Deutschland). Sie erscheinen im Impressum und in der Datenschutzerklärung.
+
+Google-Optimierung (Titel, Beschreibung, Vorschaubild `public/og.png`, `robots.txt`, `sitemap.xml`, App-Icons) erzeugt `site/build.mjs`.
